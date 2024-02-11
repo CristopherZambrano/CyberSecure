@@ -19,8 +19,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/registerUser', function(Request $request){
+Route::post('/registerUser', function(Request $request){
     $cller = new personController();
     $values = $cller->RegisterNewUser($request);
+    return $values;
+});
+
+Route::get('/logIn', function(Request $request){
+    $cller = new personController();
+    $values = $cller->logIn($request);
     return $values;
 });

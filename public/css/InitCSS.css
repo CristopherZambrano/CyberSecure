@@ -1,0 +1,88 @@
+.body{
+    background-color: black;
+}
+
+.contenedor {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: end;
+    min-height: 100vh;
+    height: 90%;
+    width: 95%;
+    align-items: stretch;
+}
+
+.izquierda, .Derecha {
+    width: 100%;
+    height: 100%;
+}
+
+.izquierda {
+    background-color:red;
+}
+
+.Derecha {
+    background-color:black;
+}
+
+.TitleGeneral{
+    text-align: center;
+    color: white;
+    font-size: 40;
+    font-style: bold;
+    position: center;
+    bottom: 50%;
+    left: 50%;
+}
+
+.NormalText{
+    color: white;
+    font-size: 20;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.buttonprimary{
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.SecondContainer{
+    padding: 10px;
+    align-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.thirdContainer{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.fourtContainer, .fiveContainer{
+    width: 90%;
+}
+
+.rowContainer{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: stretch;
+    justify-content: end;
+}
+
+
+.inputText{
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
