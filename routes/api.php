@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\issues;
 use App\Http\Controllers\personController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,4 +30,39 @@ Route::get('/logIn', function(Request $request){
     $cller = new personController();
     $values = $cller->logIn($request);
     return $values;
+});
+
+Route::get('/listIssues',function(Request $request){
+    $issue = new issues();
+    return $issue->listIssue();
+});
+
+Route::post('addIssues', function(Request $request){
+    $issue = new issues();
+    return $issue->addIssue($request);
+});
+
+Route::post('addLaw', function(Request $request){
+    $issue = new issues();
+    return $issue->saveLaw($request);
+});
+
+Route::post('addAgreement', function(Request $request){
+    $issue = new issues();
+    return $issue->saveAgreement($request);
+});
+
+Route::post('addRecomendations', function(Request $request){
+    $issue = new issues();
+    return $issue->saveRecomendations($request);
+});
+
+Route::get('listResources', function(Request $request){
+    $issue = new issues;
+    return $issue->ViewDatos($request);
+});
+
+Route::get('viewResources', function(Request $request){
+    $issue = new issues;
+    return $issue->viewpdf($request);
 });

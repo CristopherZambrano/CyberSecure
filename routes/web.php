@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\issues;
 use App\Http\Controllers\personController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,4 @@ Route::get('/registro', function(){
 Route::get('/logIn', [personController::class, 'logInWeb'])->name('StartAdventure');
 
 Route::post('/registro',[personController::class, 'RegisterNewUserWeb'])->name('VenderElAlma');
+
