@@ -179,9 +179,14 @@ class issues extends Controller
                     return 'No existe el archivo';
                 }
             default:
-                return 'Ingrese valores validos';
-                break; 
+                $message = 'Ingrese valores validos';
+                break;
         }
-        return response()->download($filePath, $name);
+        if($name){
+            return response()->download($filePath, $name);
+        }
+        else{
+            return $message;
+        }
     }
 }
