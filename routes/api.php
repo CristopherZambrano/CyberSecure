@@ -67,7 +67,3 @@ Route::get('viewResources', function(Request $request){
     $issue = new issues;
     return $issue->viewpdf($request);
 });
-
-Route::get('prueba', function(){
-    return 'Hola mundo';
-});
