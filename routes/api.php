@@ -32,9 +32,10 @@ Route::get('/logIn', function(Request $request){
     return $values;
 });
 
-Route::get('/listIssues',function(Request $request){
+Route::get('/listIssues',function(){
     $issue = new issues();
-    return $issue->listIssue();
+    $values = $issue->listIssue();
+    return $values;
 });
 
 Route::post('addIssues', function(Request $request){
