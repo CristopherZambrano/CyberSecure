@@ -3,6 +3,7 @@
 use App\Http\Controllers\issues;
 use App\Http\Controllers\personController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,4 @@ Route::get('/logIn', [personController::class, 'logInWeb'])->name('StartAdventur
 
 Route::post('/registro',[personController::class, 'RegisterNewUserWeb'])->name('VenderElAlma');
 
+URL::forceScheme('https');

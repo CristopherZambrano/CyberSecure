@@ -35,7 +35,7 @@ Route::get('/logIn', function(Request $request){
 Route::get('/listIssues',function(){
     $issue = new issues();
     $values = $issue->listIssue();
-    return $values;
+    return response()->json($values);
 });
 
 Route::post('addIssues', function(Request $request){
