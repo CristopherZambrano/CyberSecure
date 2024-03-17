@@ -183,9 +183,10 @@ class issues extends Controller
                 break;
         }
         if($name){
-            $file =file_get_contents($filePath);
+            return response()->file($filePath, ['Content-Disposition' => 'inline; filename="'.$name.'"']);
+            /* $file =file_get_contents($filePath);
             $value = base64_encode($file);
-            return response()->json(['base64Content' => $value, 'name'=> $name]);
+            return response()->json(['base64Content' => $value, 'name'=> $name]); */
         }
         else{
             return $message;
