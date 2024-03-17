@@ -90,11 +90,58 @@ class personController extends Controller
             $json['code'] = 1;
             $json['message'] = 'Transact error';
             $json['data'] = null;
-        }
-        finally{
+        } finally {
             return $json;
         }
     }
+
+    public function ModifyUser(Request $request)
+    {
+        try {
+            $person = person::where('id', $request->get('id'));
+            $json = [];
+            $person->name = $request->get('name');
+            $person->lastName = $request->get('lastName');
+            $person->email = $request->get('email');
+            $person->phone = $request->get('phone');
+            $person->address = $request->get('address');
+            $person->enterprise = $request->get('enterprise');
+            $person->user = $request->get('user');
+            $person->password = $request->get('password');
+            $person->type_user_id = 1;
+            if (empty($person->name) || empty($person->lastName) || empty($person->email || empty($person->phone) ||
+                empty($person->address) || empty($person->enterprise) || empty($person->user) || empty($person->password))) {
+                $json['code'] = 1;
+                $json['message'] = 'Please enter all data';
+                $json['data'] = null;
+            } else {
+                if (ctype_digit($person->phone)) {
+                    try {
+                        $person->password = base64_encode($person->password);
+                        $person->saveOrFail();
+                        $json['code'] = 2;
+                        $json['message'] = 'Cambio de informacion correcta';
+                        $json['data'] = null;
+                    } catch (ModelNotFoundException $e) {
+                        $json['code'] = 1;
+                        $json['message'] = $e->getMessage();
+                        $json['data'] = null;
+                    }
+                } else {
+                    $json['code'] = 1;
+                    $json['message'] = 'Please enter a valid phone number';
+                    $json['data'] = null;
+                }
+            }
+        } catch (Exception $exception) {
+            $json['code'] = 1;
+            $json['message'] = 'Transaction error';
+            $json['data'] = null;
+        } finally {
+            return $json;
+        }
+    }
+
     public function logInWeb(Request $request)
     {
         try {
@@ -106,12 +153,12 @@ class personController extends Controller
                     return view('Home');
                 } else {
                     return redirect()->back()->withErrors(['error' => 'El usuario y la contraseña no son validos']);
-            }
+                }
             } else {
                 return redirect()->back()->withErrors(['error' => 'Su usuario no existe']);
             }
         } catch (Exception $exception) {
-            return redirect()->back()->withErrors(['error' => 'Ocurrio un error durante la ejecucion']);      
+            return redirect()->back()->withErrors(['error' => 'Ocurrio un error durante la ejecucion']);
         }
     }
 
@@ -131,22 +178,21 @@ class personController extends Controller
             $registro = person::where('email', $person->email)->first();
             if ($registro) {
                 return redirect()->back()->withErrors(['error' => 'El correo ya esta en uso']);
-                } else {
-                    if (ctype_digit($person->phone)) {
-                        try {
-                            $person->password = base64_encode($person->password);
-                            $person->saveOrFail();
-                            return view('Welcome');
-                        } catch (ModelNotFoundException $e) {
-                            return redirect()->back()->withErrors(['error' => 'Ocurrio un problema, intentelo mas tarde']);
-                        }
-                    } else {
-                        return redirect()->back()->withErrors(['error' => 'Ingrese un numero de telefono valido']);
+            } else {
+                if (ctype_digit($person->phone)) {
+                    try {
+                        $person->password = base64_encode($person->password);
+                        $person->saveOrFail();
+                        return view('Welcome');
+                    } catch (ModelNotFoundException $e) {
+                        return redirect()->back()->withErrors(['error' => 'Ocurrio un problema, intentelo mas tarde']);
                     }
-                
+                } else {
+                    return redirect()->back()->withErrors(['error' => 'Ingrese un numero de telefono valido']);
+                }
             }
         } catch (Exception $exception) {
-        return redirect()->back()->withErrors(['error' => 'Ocurrio un problema, intentelo mas tarde']);
+            return redirect()->back()->withErrors(['error' => 'Ocurrio un problema, intentelo mas tarde']);
+        }
     }
-}
 }

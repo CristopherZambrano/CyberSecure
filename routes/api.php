@@ -32,6 +32,12 @@ Route::get('/logIn', function(Request $request){
     return $values;
 });
 
+Route::put('/updateUser', function(Request $request){
+    $cller = new personController();
+    $values = $cller->ModifyUser($request);
+    return $values;
+});
+
 Route::get('/listIssues',function(){
     $issue = new issues();
     $values = $issue->listIssue();
