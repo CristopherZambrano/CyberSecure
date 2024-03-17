@@ -45,7 +45,7 @@ class issues extends Controller
                 $value = agreement::where('idIssue', '=', $request->input('id'))->get();
                 break;
             case 3:
-                $value = recomendation::where('idIssue','=',$request->input('id_issue'))->get();
+                $value = recomendation::where('idIssue','=',$request->input('id'))->get();
             default:
                 $value = false;
                 break; 
