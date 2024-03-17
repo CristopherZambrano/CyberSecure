@@ -183,7 +183,9 @@ class issues extends Controller
                 break;
         }
         if($name){
-            return response()->download($filePath, $name);
+            $file =file_get_contents($filePath);
+            $value = base64_encode($file);
+            return response()->json(['base64Content' => $value, 'name'=> $name]);
         }
         else{
             return $message;
