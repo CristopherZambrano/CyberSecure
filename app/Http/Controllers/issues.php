@@ -183,7 +183,11 @@ class issues extends Controller
                 break;
         }
         if($name){
-            return response()->file($filePath, ['Content-Disposition' => 'inline; filename="'.$name.'"']);
+            return response()->file($filePath, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'inline; filename="' . $name . '"'
+            ]);
+            //return response()->file($filePath, ['Content-Disposition' => 'inline; filename="'.$name.'"']);
             /* $file =file_get_contents($filePath);
             $value = base64_encode($file);
             return response()->json(['base64Content' => $value, 'name'=> $name]); */
