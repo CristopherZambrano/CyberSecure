@@ -98,7 +98,7 @@ class personController extends Controller
     public function ModifyUser(Request $request)
     {
         try {
-            $person = person::where('id', $request->get('id'));
+            $person = person::where('id', $request->get('id'))->first();
             $json = [];
             $person->name = $request->get('name');
             $person->lastName = $request->get('lastName');
@@ -136,7 +136,7 @@ class personController extends Controller
         } catch (Exception $exception) {
             $json['code'] = 1;
             $json['message'] = 'Transaction error';
-            $json['data'] = null;
+            $json['data'] = $exception;
         } finally {
             return $json;
         }
